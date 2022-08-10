@@ -4,16 +4,19 @@ const express = require('express')
 const listProducts = express.Router()
 
 listProducts.post('/listProducts', async (req, res) => {
-	const { page, size } = req.body
+	const { offset, page = 1, size } = req.body
 
 	const products = await Product.findAll()
 	const total_items = await Product.count()
 	const number_pages =
-		total_items % size === 0
-			? total_items / size
-			: Math.floor(total_items / size) + 1
+		(total_items - offset) % size === 0
+			? (total_items - offset) / size
+			: Math.floor((total_items - offset) / size) + 1
 
-	const productsPaginated = products.slice((page - 1) * size, page * size)
+	const productsPaginated = products.slice(
+		(page - 1) * size + offset - 1,
+		page * size + offset - 1
+	)
 
 	return res.status(200).json({
 		total_products: total_items,
