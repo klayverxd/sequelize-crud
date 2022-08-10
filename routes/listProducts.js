@@ -9,9 +9,9 @@ listProducts.post('/listProducts', async (req, res) => {
 	const products = await Product.findAll()
 	const total_items = await Product.count()
 	const number_pages =
-		(total_items - offset) % size === 0
-			? (total_items - offset) / size
-			: Math.floor((total_items - offset) / size) + 1
+		(total_items - offset + 1) % size === 0
+			? (total_items - offset + 1) / size
+			: Math.floor((total_items - offset + 1) / size) + 1
 
 	const productsPaginated = products.slice(
 		(page - 1) * size + offset - 1,
