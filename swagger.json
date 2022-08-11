@@ -1,0 +1,350 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Swagger Petstore - OpenAPI 3.0",
+		"description": "This is a sample Product Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Product Store repository](https://github.com/klayverxd/sequelize-crud)",
+		"termsOfService": "http://swagger.io/terms/",
+		"contact": {
+			"email": "klayverx@gmail.com"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"version": "1.0.11"
+	},
+	"externalDocs": {
+		"description": "Find out more about Swagger",
+		"url": "http://swagger.io"
+	},
+	"servers": [
+		{
+			"url": "https://localhost:3000"
+		}
+	],
+	"tags": [
+		{
+			"name": "products",
+			"description": "Everything about your Products"
+		}
+	],
+	"paths": {
+		"/createProduct": {
+			"post": {
+				"tags": ["products"],
+				"summary": "Add a new product to the store",
+				"description": "Add a new product to the store",
+				"operationId": "addProduct",
+				"requestBody": {
+					"description": "Create a new product in the store",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Product"
+							}
+						},
+						"application/xml": {
+							"schema": {
+								"$ref": "#/components/schemas/Product"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Product"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							},
+							"application/xml": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							}
+						}
+					},
+					"405": {
+						"description": "Invalid input"
+					}
+				}
+			}
+		},
+		"/product/{productId}": {
+			"put": {
+				"tags": ["products"],
+				"summary": "Update an existing pet",
+				"description": "Update an existing pet by Id",
+				"operationId": "updatePet",
+				"parameters": [
+					{
+						"name": "productId",
+						"in": "path",
+						"description": "Product id to update",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Update an existent pet in the store",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Product"
+							}
+						},
+						"application/xml": {
+							"schema": {
+								"$ref": "#/components/schemas/Product"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Product"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							},
+							"application/xml": {
+								"schema": {
+									"$ref": "#/components/schemas/Product"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "Pet not found"
+					},
+					"405": {
+						"description": "Validation exception"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["products"],
+				"summary": "Deletes a product",
+				"description": "delete a product",
+				"operationId": "deletePet",
+				"parameters": [
+					{
+						"name": "productId",
+						"in": "path",
+						"description": "Product id to delete",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"400": {
+						"description": "Invalid pet value"
+					}
+				}
+			}
+		},
+		"/listProducts": {
+			"post": {
+				"tags": ["products"],
+				"summary": "List products with pagination",
+				"description": "List products with pagination",
+				"operationId": "listProducts",
+				"requestBody": {
+					"description": "List products with pagination",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ListProduct"
+							}
+						},
+						"application/xml": {
+							"schema": {
+								"$ref": "#/components/schemas/ListProduct"
+							}
+						},
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/ListProduct"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ListedProduct"
+								}
+							},
+							"application/xml": {
+								"schema": {
+									"$ref": "#/components/schemas/ListedProduct"
+								}
+							}
+						}
+					},
+					"405": {
+						"description": "Invalid input"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Product": {
+				"required": ["name", "price", "description"],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64",
+						"example": 10
+					},
+					"name": {
+						"type": "string",
+						"example": "Nome do produto"
+					},
+					"price": {
+						"type": "integer",
+						"format": "int64",
+						"example": 10
+					},
+					"description": {
+						"type": "string",
+						"example": "Descrição do produto"
+					}
+				},
+				"xml": {
+					"name": "product"
+				}
+			},
+			"ListProduct": {
+				"required": ["offset", "size"],
+				"type": "object",
+				"properties": {
+					"offset": {
+						"type": "integer",
+						"format": "int64",
+						"example": 1
+					},
+					"page": {
+						"type": "integer",
+						"format": "int64",
+						"example": 1
+					},
+					"size": {
+						"type": "integer",
+						"format": "int64",
+						"example": 1
+					}
+				},
+				"xml": {
+					"name": "product"
+				}
+			},
+			"ListedProduct": {
+				"type": "object",
+				"properties": {
+					"total_products": {
+						"type": "integer",
+						"format": "int64",
+						"example": 1
+					},
+					"products": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Product"
+						}
+					},
+					"page": {
+						"type": "object",
+						"properties": {
+							"items_per_page": {
+								"type": "integer",
+								"format": "int64",
+								"example": 5
+							},
+							"current_page": {
+								"type": "integer",
+								"format": "int64",
+								"example": 1
+							},
+							"number_pages": {
+								"type": "integer",
+								"format": "int64",
+								"example": 3
+							}
+						}
+					}
+				},
+				"xml": {
+					"name": "product"
+				}
+			},
+			"ApiResponse": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"type": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"xml": {
+					"name": "##default"
+				}
+			}
+		},
+		"requestBodies": {
+			"Product": {
+				"description": "Product object that needs to be added to the store",
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "#/components/schemas/Product"
+						}
+					},
+					"application/xml": {
+						"schema": {
+							"$ref": "#/components/schemas/Product"
+						}
+					}
+				}
+			}
+		}
+	}
+}
