@@ -1,8 +1,8 @@
 {
 	"openapi": "3.0.3",
 	"info": {
-		"title": "Swagger Petstore - OpenAPI 3.0",
-		"description": "This is a sample Product Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Product Store repository](https://github.com/klayverxd/sequelize-crud)",
+		"title": "Swagger Productstore - OpenAPI 3.0",
+		"description": "This is a sample Product Store Server based on the OpenAPI 3.0 specification.  You can find out more about\nSwagger at [https://swagger.io](https://swagger.io). In the third iteration of the product store, we've switched to the design first approach!\nYou can now help us improve the API whether it's by making changes to the definition itself or to the code.\nThat way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\nSome useful links:\n- [The Product Store repository](https://github.com/klayverxd/sequelize-crud)",
 		"termsOfService": "http://swagger.io/terms/",
 		"contact": {
 			"email": "klayverx@gmail.com"
@@ -81,9 +81,9 @@
 		"/product/{productId}": {
 			"put": {
 				"tags": ["products"],
-				"summary": "Update an existing pet",
-				"description": "Update an existing pet by Id",
-				"operationId": "updatePet",
+				"summary": "Update an existing product",
+				"description": "Update an existing product by Id",
+				"operationId": "updateProduct",
 				"parameters": [
 					{
 						"name": "productId",
@@ -97,7 +97,7 @@
 					}
 				],
 				"requestBody": {
-					"description": "Update an existent pet in the store",
+					"description": "Update an existent product in the store",
 					"content": {
 						"application/json": {
 							"schema": {
@@ -137,7 +137,7 @@
 						"description": "Invalid ID supplied"
 					},
 					"404": {
-						"description": "Pet not found"
+						"description": "Product not found"
 					},
 					"405": {
 						"description": "Validation exception"
@@ -148,7 +148,7 @@
 				"tags": ["products"],
 				"summary": "Deletes a product",
 				"description": "delete a product",
-				"operationId": "deletePet",
+				"operationId": "deleteProduct",
 				"parameters": [
 					{
 						"name": "productId",
@@ -163,7 +163,7 @@
 				],
 				"responses": {
 					"400": {
-						"description": "Invalid pet value"
+						"description": "Invalid product value"
 					}
 				}
 			}
